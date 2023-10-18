@@ -1,3 +1,3 @@
-# [Class Project Title]
+# [Oranges]
 
-Provide a short description of your results, if applicable.
+Simple responsive orange-themed Figma hero template.
