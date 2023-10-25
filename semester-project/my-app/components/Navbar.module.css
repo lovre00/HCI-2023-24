@@ -1,0 +1,28 @@
+.navbar {
+    background-color: #333;
+    color: white;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .navList {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navItem {
+    margin-right: 20px;
+  }
+  
+  .navLink {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navLink:hover {
+    text-decoration: underline;
+  }
