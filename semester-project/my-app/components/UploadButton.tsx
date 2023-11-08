@@ -9,6 +9,7 @@ const UploadButton = () => {
     const inputElement = document.createElement('input');
     inputElement.type = 'file';
     inputElement.onchange = (event) => {
+      if (!event.target.files) return;
       setUploaded(true);
       console.log('Selected file:', event.target.files[0]);
     };
