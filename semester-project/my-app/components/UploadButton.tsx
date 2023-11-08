@@ -37,7 +37,7 @@ const UploadButton: React.FC = () => {
       whileTap={{ scale: 0.9 }}
       onClick={handleFileUpload}
     >
-      {isFileUploaded ? 'Scan Now' : 'Upload File'}
+      {isFileUploaded ? 'Choose file' : 'Scan file'}
     </CircleButton>
   );
 };
