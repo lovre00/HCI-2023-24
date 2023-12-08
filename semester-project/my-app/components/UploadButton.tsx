@@ -1,28 +1,33 @@
-"use client";
 
+"use client";
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const UploadButton = () => {
+  const router = useRouter();
   const [uploaded, setUploaded] = useState(false);
 
   const handleFileUpload = () => {
-    const inputElement = document.createElement('input');
-    inputElement.type = 'file';
-    inputElement.onchange = (event) => {
-      setUploaded(true);
-      // console.log('Selected file:', event.target.files?.[0]);
-    };
-    inputElement.click();
+    if (!uploaded) {
+      const inputElement = document.createElement('input');
+      inputElement.type = 'file';
+      inputElement.onchange = (event) => {
+        setUploaded(true);
+        // console.log('Selected file:', event.target.files?.[0]);
+      };
+      inputElement.click();
+    } else {
+      router.push('/file'); // Redirect to '/file' if already uploaded and confirmed
+    }
   };
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="w-24 h-24 bg-gray-300 rounded-full mb-4">
-        {/* Placeholder logo image */}
-        <img src="https://via.placeholder.com/150" alt="Logo" className="w-full h-full object-cover rounded-full" />
-      </div>
-      <div className="w-64 h-64 border-dashed border-2 border-gray-400 flex items-center justify-center mb-4">
-        Drag and drop your files here
+       <p className="text-sm text-gray-600 mb-2 w-64 justify-center text-center">
+        Scan executable file for common signatures, get PE info, detailed entropy overview and more.
+      </p>
+      <div className="w-64 h-64 border-dashed border-2 rounded-lg border-gray-400 flex items-center justify-center mb-4">
+        Drag & drop file here
       </div>
       <p className="text-gray-500 text-lg my-4">or</p>
       <button

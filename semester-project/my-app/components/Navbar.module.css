@@ -1,10 +1,10 @@
 .navbar {
-    background-color: #333;
-    color: white;
-    height: 50px;
+    background-color: #ffffff;
+    color: rgb(7, 7, 7);
+    height: 60px;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: center;
   }
   
   .navList {
@@ -15,14 +15,23 @@
   }
   
   .navItem {
-    margin-right: 20px;
   }
   
   .navLink {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
   }
   
-  .navLink:hover {
-    text-decoration: underline;
-  }
+.navButton {
+  height: 60px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.navButton:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(37, 99, 235)
+}

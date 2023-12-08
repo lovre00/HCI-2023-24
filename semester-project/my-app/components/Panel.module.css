@@ -1,0 +1,46 @@
+.collapsible-panel {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .collapsible-panel .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .collapsible-panel .title {
+    font-weight: bold;
+  }
+  
+  .collapsible-panel .collapse-toggle {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .collapsible-panel .collapse-toggle:hover {
+    background-color: #c0c0c0;
+  }
+  
+  .collapsible-panel .content {
+    padding: 10px;
+  }
+  
+  .collapsible-panel .data-row {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  
+  .collapsible-panel .label {
+    font-weight: bold;
+    width: 120px;
+  }
+  
+  .collapsible-panel .image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
