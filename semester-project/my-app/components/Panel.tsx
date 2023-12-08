@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 
-const CollapsiblePanel = ({ title, data }) => {
+const CollapsiblePanel = ({ title, data }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapse = () => {
