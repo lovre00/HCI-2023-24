@@ -1,0 +1,103 @@
+/* Panel.module.css */
+
+/* Base panel styles */
+.panel {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 900px;
+  }
+  
+  /* Default panel styles */
+  .defaultPanel {
+    /* Add default panel styles here */
+    background-color: #f0f0f0; /* Example background color */
+  }
+  
+  /* Warning panel styles */
+  .warningPanel {
+    /* Add warning panel styles here */
+    background-color: #ffd54f; /* Example background color */
+  }
+  
+  /* Error panel styles */
+  .errorPanel {
+    /* Add error panel styles here */
+    background-color: #ef5350; /* Example background color */
+  }
+  
+  /* OK panel styles */
+  .okPanel {
+    /* Add OK panel styles here */
+    background-color: #ceeaff; /* Example background color */
+    border-color: #146eb8;
+    color: #146eb8;
+  }
+  
+  /* Image styles */
+  .statusImage { /* Example maximum width for the image */
+    height: auto;
+    margin-right: 15px;
+    max-width:200px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 100%; /* Set the width to occupy the entire container */
+    padding-right: 0px; /* Add padding to move content away from the right edge */
+    padding-top: 5px;
+  }
+
+  /* Label styles */
+  .label {
+    font-weight: bold;
+    text-align: right;
+    width: 100%; /* Make labels occupy the full width */
+    box-sizing: border-box; /* Include padding in the width */
+  }
+  
+  /* Value styles */
+  .value {
+    text-align: right;
+    width: 100%; /* Make values occupy the full width */
+    box-sizing: border-box; /* Include padding in the width */
+    padding-bottom: 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .panel {
+        display: flex;
+        flex-direction: column; /* Change to column layout for mobile */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 15px;
+        width: 90%;
+        max-width: 900px;
+        align-items: center;
+    }
+
+    .statusImage {
+        width: 100%; /* Adjust the image width to fit the container */
+        margin:auto;
+      }
+    
+      .content {
+        text-align: center; /* Center align labels/values for mobile */
+        padding: 0px; /* Reset padding */
+        align-items: center;
+      }
+    
+      .label,
+      .value {
+        width: auto; /* Reset width for labels/values */
+        text-align: center; /* Center align text */
+        padding: 2px;
+      }
+}

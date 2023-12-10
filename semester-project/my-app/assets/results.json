@@ -1,0 +1,126 @@
+{
+    "pe_header": {
+        "machine": "Intel i386",
+        "timedatestamp": "Fri Oct 28 15:35:14 2022",
+        "numberofsections": 3,
+        "pointertosymboltable": "00019e00",
+        "numberofsymbols": 1242,
+        "sizeofoptionalheader": "000000e0",
+        "characteristics": [
+            "relocations_stripped",
+            "executable_image",
+            "line_nums_stripped",
+            "bytes_reversed"
+        ],
+        "magic": "0000010b",
+        "majorlinkerversion": "00000002",
+        "minorlinkerversion": "0000001e",
+        "sizeofcode": "00008000",
+        "sizeofinitializeddata": "00001000",
+        "sizeofuninitializeddata": "0001d000",
+        "entrypoint": "00024ef0",
+        "baseofcode": "0001e000",
+        "imagebase": "00400000",
+        "sectionalignment": "00001000",
+        "filealignment": "00000200",
+        "majoroperatingsystemversion": "00000004",
+        "minoroperatingsystemversion": "00000000",
+        "majorimageversion": "00000001",
+        "minorimageversion": "00000000",
+        "checksum": "00000000",
+        "majorsubsystemversion": "00000004",
+        "minorsubsystemversion": "00000000",
+        "sizeofimage": "00027000",
+        "sizeofheaders": "00000200",
+        "subsystem": {
+            "type": "Windows CUI",
+            "description": "Windows character-mode user interface."
+        },
+        "sizeofstackreserve": "00200000",
+        "sizeofstackcommit": "00001000",
+        "sizeofheapreserve": "00100000",
+        "sizeofheapcommit": "00001000",
+        "numberofrvaandsizes": "00000010",
+        "sections": {
+            "UPX0": {
+                "sizeofrawdata": "00000000",
+                "pointertorawdata": "00000200",
+                "virtualsize": "0001d000",
+                "virtualaddress": "00001000",
+                "execute": 1,
+                "read": 1,
+                "write": 1
+            },
+            "UPX1": {
+                "sizeofrawdata": "00007200",
+                "pointertorawdata": "00000200",
+                "virtualsize": "00008000",
+                "virtualaddress": "0001e000",
+                "execute": 1,
+                "read": 1,
+                "write": 1
+            },
+            "UPX2": {
+                "sizeofrawdata": "00000200",
+                "pointertorawdata": "00007400",
+                "virtualsize": "00001000",
+                "virtualaddress": "00026000",
+                "execute": 0,
+                "read": 1,
+                "write": 1
+            }
+        },
+        "overlay": {
+            "pe_size": 30208,
+            "disk_size": 58285,
+            "detected": 1
+        },
+        "imports": {
+            "KERNEL32.DLL": [
+                "LoadLibraryA",
+                "ExitProcess",
+                "GetProcAddress",
+                "VirtualProtect"
+            ],
+            "msvcrt.dll": [
+                "_iob"
+            ]
+        }
+    },
+    "average_entropy_per_section": {
+        "UPX0": 6.969501131095436,
+        "UPX1": 7.354641716379226,
+        "UPX2": 4.133989302174741
+    },
+    "average_overlay_entropy": 2.8780452662090794,
+    "signatures": {
+        "upx": "packer"
+    },
+    "malapi_import_check": {
+        "LoadLibraryA": {
+            "description": "LoadLibraryA is used to load a specified module into the address space of the calling process. Malware commonly use this to load DLLs dynamically for evasion purposes.",
+            "info": "Injection",
+            "library": "Kernel32.dll"
+        },
+        "GetProcAddress": {
+            "description": "GetProcAddress is used to get the memory address of a function in a DLL. This is often used by malware for obfuscation and evasion purposes to avoid having to call the function directly.",
+            "info": "Injection",
+            "library": "Kernel32.dll"
+        },
+        "VirtualProtect": {
+            "description": "VirtualProtect is often used by malware to modify memory protection (often to allow write or execution).",
+            "info": "Injection",
+            "library": "Kernel32.dll"
+        }
+    },
+    "upx_custom_scan: ": {
+        "algorithm": "NRV2B_LE32",
+        "version": "4.02",
+        "strength": "best",
+        "characteristic_sections": [
+            "UPX0",
+            "UPX1",
+            "UPX2"
+        ]
+    }
+}

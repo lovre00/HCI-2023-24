@@ -1,37 +1,88 @@
 "use client";
 import { useState } from 'react';
+import styles from './Panel.module.css';
 
-const CollapsiblePanel = ({ title, data }: any) => {
+const RenderData = ({ data }: any) => {
+  // Recursive function to render JSON data as a table
+  const renderJSONAsTable = (jsonData: any) => {
+    return (
+      <table className={styles.jsontable}>
+        <tbody>
+          {Object.keys(jsonData).map((key) => (
+            <tr key={key} className="data-row">
+              <td className="font-bold text-sm text-stone-700">{key}</td>
+              <td className="value text-sm text-right">
+                {typeof jsonData[key] === 'object' ? (
+                  // Render nested object or array
+                  <RenderData key={key} data={jsonData[key]} />
+                ) : (
+                  // Render value
+                  jsonData[key]
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
+  return renderJSONAsTable(data);
+};
+
+const CollapsiblePanel = ({ title, data, type }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
+  var headerType = '';
+  var borderType = '';
+  var label = ''
+
+  if (type == 'error') {
+    headerType = 'errorheader'
+    borderType = 'error'
+    label = '✖'
+  } else if (type == 'default')
+  {
+    headerType = 'header'
+    borderType = 'default'
+    label = '✔'
+  }
+
   return (
-    <div className="collapsible-panel">
-      <div className="header" onClick={toggleCollapse}>
-        <div className="title">{title}</div>
+    <div className={type}>
+      <div className={headerType} onClick={toggleCollapse}>
+        <div className="title">{label} {title}</div>
         <div className="collapse-toggle">{isCollapsed ? 'Expand' : 'Collapse'}</div>
       </div>
       {!isCollapsed && (
         <div className="content">
-          {Object.keys(data).map((key) => (
-            <div key={key} className="data-row">
-              <div className="label">{key}:</div>
-              <div className="value">{data[key]}</div>
-            </div>
-          ))}
+          <RenderData data={data}/>
           {data.imageUrl && <img src={data.imageUrl} alt="Image" className="image" />}
         </div>
       )}
       <style jsx>{`
-        .collapsible-panel {
+        .default {
           border: 1px solid #ccc;
           margin-bottom: 10px;
-          width: 50%; /* Set the width to 50% or adjust as needed */
+          width: 100%; /* Set the width to 50% or adjust as needed */
           border-radius: 5px; /* Rounded borders */
           overflow: hidden; /* Hide content overflow */
+          align-items: center;
+          max-width: 900px;
+        }
+
+        @media screen and (max-width: 600px) {
+          .default {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            width: 90%; /* Set the width to 50% or adjust as needed */
+            border-radius: 5px; /* Rounded borders */
+            overflow: hidden; /* Hide content overflow */
+          }
         }
         .header {
           display: flex;
@@ -40,7 +91,24 @@ const CollapsiblePanel = ({ title, data }: any) => {
           padding: 10px;
           cursor: pointer;
           background-color: #f0f0f0; /* Color of the upper part of the panel */
-          border-bottom: 1px solid #ccc; /* Border color */
+        }
+        .error {
+          border: 1px solid #ccc;
+          margin-bottom: 10px;
+          width: 50%; /* Set the width to 50% or adjust as needed */
+          border-radius: 5px; /* Rounded borders */
+          overflow: hidden; /* Hide content overflow */
+          background-color: #ffa1a1;
+        }
+        .errorheader {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          cursor: pointer;
+          color: #ffffff;
+          background-color: #db5151; /* Color of the upper part of the panel */
+        
         }
         .title {
           font-weight: bold;
@@ -50,19 +118,13 @@ const CollapsiblePanel = ({ title, data }: any) => {
           background-color: transparent; /* Transparent background for the button */
           cursor: pointer;
         }
-        .collapse-toggle:hover {
-          background-color: #e0e0e0; /* Background color on hover */
-        }
         .content {
           padding: 10px;
+          width:100%;
         }
         .data-row {
           display: flex;
           margin-bottom: 5px;
-        }
-        .label {
-          font-weight: bold;
-          width: 120px;
         }
         .image {
           max-width: 100%;
