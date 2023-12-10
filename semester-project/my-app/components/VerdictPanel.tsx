@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './VerdictPanel.module.css'; // Import your CSS file
 
-const VerdictPanel = ({ status, data }) => {
+const VerdictPanel = ({ status, data }: any) => {
   let panelTheme = '';
   let imageSource = '';
 
