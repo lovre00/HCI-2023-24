@@ -12,7 +12,7 @@ const Home = () => {
       <Navbar />
       <div className="min-h-fit flex flex-col items-center justify-center mx-auto;">
        <ExcaliburComponent/>
-       <div className="bg-stone-100 rounded-lg shadow-md p-4 place-self-center ">
+       <div className="bg-stone-100 rounded-lg shadow-md p-4 place-self-center m-16">
         <UploadButton />
         </div>
       </div>

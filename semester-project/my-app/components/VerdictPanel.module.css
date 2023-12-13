@@ -32,9 +32,9 @@
   /* OK panel styles */
   .okPanel {
     /* Add OK panel styles here */
-    background-color: #ceeaff; /* Example background color */
-    border-color: #146eb8;
-    color: #146eb8;
+    background-color: rgb(235, 242, 255); /* Example background color */
+    border-color: rgb(37, 99,235);
+    color: rgb(37, 99,235);
   }
   
   /* Image styles */
@@ -47,7 +47,7 @@
   .content {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-end;
     width: 100%; /* Set the width to occupy the entire container */
     padding-right: 0px; /* Add padding to move content away from the right edge */

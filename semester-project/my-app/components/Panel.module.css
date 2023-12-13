@@ -88,6 +88,10 @@
     padding: 6px 0;
   }
 
+  .jsontable tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
   .jsontable td:last-child {
     border-bottom: none;
   }

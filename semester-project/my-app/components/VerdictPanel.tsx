@@ -16,7 +16,7 @@ const VerdictPanel = ({ status, data }: any) => {
       break;
     case 'ok':
       panelTheme = styles.okPanel;
-      imageSource = 'https://i.postimg.cc/3JGp0zw8/Ionicons-checkmark-circle-svg.png'; // Replace with your OK sign image URL
+      imageSource = 'https://i.postimg.cc/kMN3zxdc/Ionicons-checkmark-circle-svg.png'; // Replace with your OK sign image URL
       break;
     default:
       panelTheme = styles.defaultPanel;

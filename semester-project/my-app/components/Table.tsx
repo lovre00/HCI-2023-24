@@ -1,36 +1,47 @@
 "use client";
 import { useState } from 'react';
-import styles from './Panel.module.css';
 
-const RenderData = ({ data }: any) => {
-  // Recursive function to render JSON data as a table
-  const renderJSONAsTable = (jsonData: any) => {
+const RenderData = ({ sections }: any) => {
+    const sectionKeys = Object.keys(sections);
+
     return (
-      <table className={styles.jsontable}>
-        <tbody>
-          {Object.keys(jsonData).map((key) => (
-            <tr key={key} className="data-row">
-              <td className="font-bold text-sm text-stone-700">{key}</td>
-              <td className="value text-sm text-right">
-                {typeof jsonData[key] === 'object' ? (
-                  // Render nested object or array
-                  <RenderData key={key} data={jsonData[key]} />
-                ) : (
-                  // Render value
-                  jsonData[key]
-                )}
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border p-2">Section Name</th>
+              <th className="border p-2">Size of Raw Data</th>
+              <th className="border p-2">Pointer to Raw Data</th>
+              <th className="border p-2">Virtual Size</th>
+              <th className="border p-2">Virtual Address</th>
+              <th className="border p-2">Execute</th>
+              <th className="border p-2">Read</th>
+              <th className="border p-2">Write</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sectionKeys.map((sectionKey, index) => (
+              <tr
+                key={sectionKey}
+                className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}
+              >
+                <td className="border p-2">{sectionKey}</td>
+                <td className="border p-2">{sections[sectionKey].sizeofrawdata}</td>
+                <td className="border p-2">{sections[sectionKey].pointertorawdata}</td>
+                <td className="border p-2">{sections[sectionKey].virtualsize}</td>
+                <td className="border p-2">{sections[sectionKey].virtualaddress}</td>
+                <td className="border p-2">{sections[sectionKey].execute}</td>
+                <td className="border p-2">{sections[sectionKey].read}</td>
+                <td className="border p-2">{sections[sectionKey].write}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
-  };
-
-  return renderJSONAsTable(data);
 };
 
-const CollapsiblePanel = ({ title, data, type }: any) => {
+const Table = ({ title, data, type }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapse = () => {
@@ -58,8 +69,7 @@ const CollapsiblePanel = ({ title, data, type }: any) => {
       </div>
       {!isCollapsed && (
         <div className="content">
-          <RenderData data={data}/>
-          {data.imageUrl && <img src={data.imageUrl} alt="Image" className="image" />}
+          <RenderData sections={data}/>
         </div>
       )}
       <style jsx>{`
@@ -134,4 +144,4 @@ const CollapsiblePanel = ({ title, data, type }: any) => {
   );
 };
 
-export default CollapsiblePanel;
+export default Table;
