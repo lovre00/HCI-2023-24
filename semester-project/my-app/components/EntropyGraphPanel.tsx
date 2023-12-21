@@ -1,49 +1,9 @@
 "use client";
 import { useState } from 'react';
+import styles from './EntropyGraphPanel.module.css';
+import EntropyGraph from './EntropyGraph';
 
-const RenderData = ({ sections }: any) => {
-    const sectionKeys = Object.keys(sections);
-
-    return (
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse border">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border p-2">Section Name</th>
-              <th className="border p-2">Size of Raw Data</th>
-              <th className="border p-2">Pointer to Raw Data</th>
-              <th className="border p-2">Virtual Size</th>
-              <th className="border p-2">Virtual Address</th>
-              <th className="border p-2">Execute</th>
-              <th className="border p-2">Read</th>
-              <th className="border p-2">Write</th>
-              <th className="border p-2">Entropy</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sectionKeys.map((sectionKey, index) => (
-              <tr
-                key={sectionKey}
-                className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}
-              >
-                <td className="border p-2">{sectionKey}</td>
-                <td className="border p-2">{sections[sectionKey].sizeofrawdata}</td>
-                <td className="border p-2">{sections[sectionKey].pointertorawdata}</td>
-                <td className="border p-2">{sections[sectionKey].virtualsize}</td>
-                <td className="border p-2">{sections[sectionKey].virtualaddress}</td>
-                <td className="border p-2">{sections[sectionKey].execute}</td>
-                <td className="border p-2">{sections[sectionKey].read}</td>
-                <td className="border p-2">{sections[sectionKey].write}</td>
-                <td className="border p-2">{sections[sectionKey].average_entropy}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-};
-
-const Table = ({ title, data, type }: any) => {
+const EntropyGraphPanel = ({ title, entropyBlocks, type }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapse = () => {
@@ -71,7 +31,7 @@ const Table = ({ title, data, type }: any) => {
       </div>
       {!isCollapsed && (
         <div className="content">
-          <RenderData sections={data}/>
+          <EntropyGraph entropyBlocks={entropyBlocks} />
         </div>
       )}
       <style jsx>{`
@@ -146,4 +106,4 @@ const Table = ({ title, data, type }: any) => {
   );
 };
 
-export default Table;
+export default EntropyGraphPanel;

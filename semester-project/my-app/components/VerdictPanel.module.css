@@ -81,6 +81,7 @@
         width: 90%;
         max-width: 900px;
         align-items: center;
+        border-color: rgb(37, 99,235);
     }
 
     .statusImage {
