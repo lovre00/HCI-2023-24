@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    margin-top: 10px;
+    font-size: 20px; /* Adjust icon size as needed */
+    margin-right: 8px; /* Space between icon and text */
+  }
+  
+  .text {
+    margin-top: 10px;
+    color: #888; /* Gray text color */
+    font-size: 14px; /* Adjust text font size */
+  }
+  
+  .italic {
+    font-style: italic; /* Italicize the text */
+  }
+  
