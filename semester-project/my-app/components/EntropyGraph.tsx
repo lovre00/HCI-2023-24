@@ -9,7 +9,7 @@ Chart.register(
 
 const EntropyGraph = ({ sections, entropyBlocks, entropySectionRanges }: any) => {
   const chartContainer = useRef(null);
-  const chartInstance = useRef(null);
+  const chartInstance = useRef<Chart<"line", any, string> | null>(null);
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
@@ -48,7 +48,7 @@ const EntropyGraph = ({ sections, entropyBlocks, entropySectionRanges }: any) =>
               },
             },
             annotation: {
-              annotations: entropySectionRanges.map((point, index) => {
+              annotations: entropySectionRanges.map((point: any, index: any) => {
                 const sectionNames = Object.keys(sections);
                 const content = sectionNames[index]
 
