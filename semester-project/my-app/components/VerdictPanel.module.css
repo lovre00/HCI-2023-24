@@ -20,7 +20,9 @@
   /* Warning panel styles */
   .warningPanel {
     /* Add warning panel styles here */
-    background-color: #ffd54f; /* Example background color */
+    background-color: #ffe57f; /* Example background color */
+    border: 1px solid #ffcc00;
+    color: #917320;
   }
   
   /* Error panel styles */
@@ -40,7 +42,7 @@
   /* Image styles */
   .statusImage { /* Example maximum width for the image */
     height: auto;
-    margin-right: 15px;
+    padding: 30px;
     max-width:200px;
   }
   
@@ -81,8 +83,28 @@
         width: 90%;
         max-width: 900px;
         align-items: center;
-        border-color: rgb(37, 99,235);
     }
+
+    .warningPanel {
+      /* Add warning panel styles here */
+      background-color: #ffe57f; /* Example background color */
+      border: 1px solid #ffcc00;
+      color: #5f490c;
+    }
+    
+    /* Error panel styles */
+    .errorPanel {
+      /* Add error panel styles here */
+      background-color: #ef5350; /* Example background color */
+    }
+    
+    /* OK panel styles */
+    .okPanel {
+      /* Add OK panel styles here */
+      background-color: rgb(235, 242, 255); /* Example background color */
+      border-color: rgb(37, 99,235);
+      color: rgb(37, 99,235);
+    }  
 
     .statusImage {
         width: 100%; /* Adjust the image width to fit the container */

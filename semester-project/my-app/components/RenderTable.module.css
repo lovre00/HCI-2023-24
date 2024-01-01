@@ -2,6 +2,14 @@
   border-collapse: collapse; /* Let the table adjust its width based on content */
   width: 100%;/* Set a maximum width to prevent excessive stretching */
   margin: auto;
+  font-size: 14px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.jsontable th {
+  padding: 8px;
+  background-color: #f0f0f0;
 }
 
 .jsontable td {
@@ -31,6 +39,13 @@
   .jsontable {
     width: 100%;
     table-layout: auto; /* Adjust table layout for smaller screens */
+    border: none;
+  }
+
+  .jsontable th {
+    padding: 8px;
+    background-color: #f0f0f0;
+    display: none;
   }
   
   .jsontable td {

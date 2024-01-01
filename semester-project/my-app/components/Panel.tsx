@@ -9,16 +9,20 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
     setIsCollapsed(!isCollapsed);
   };
 
-  var panelType = "defaultpanel";
+  let panelType = "defaultpanel";
+  let icon = '';
 
   if (type == 'warning') {
     panelType = "warningpanel";
+    icon = 'https://i.postimg.cc/d17YgmV9/warning-small.png';
   }
 
   return (
     <div className={panelType}>
       <div className={type} onClick={toggleCollapse}>
-        <div className="title">{title}</div>
+        <div className="title">
+          {icon && <img src={icon} alt={`${type} icon`} className="icon" />}{title}
+        </div>
         <div className="collapse-toggle">{isCollapsed ? '+' : '-'}</div>
       </div>
       {!isCollapsed && (
@@ -27,6 +31,12 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
         </div>
       )}
       <style jsx>{`
+        .icon {
+          margin-right: 5px;
+          max-width: 20px;
+          max-height: 20px;
+          vertical-align: middle;
+        }
         .defaultpanel {
           border: 1px solid #ccc;
           margin-bottom: 10px;
@@ -93,6 +103,8 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           padding: 5px;
           font-weight: bold;
           font-size: 15px;
+          display: flex;
+          align-items: center;
         }
         .collapse-toggle {
           padding: 5px 10px;

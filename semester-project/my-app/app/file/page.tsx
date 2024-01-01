@@ -61,7 +61,8 @@ const About = () => {
                     "virtualaddress": "00001000",
                     "execute": 1,
                     "read": 1,
-                    "write": 1
+                    "write": 1,
+                    "average_entropy": 6.96
                 },
                 "UPX1": {
                     "sizeofrawdata": "00007200",
@@ -70,7 +71,8 @@ const About = () => {
                     "virtualaddress": "0001e000",
                     "execute": 1,
                     "read": 1,
-                    "write": 1
+                    "write": 1,
+                    "average_entropy": 7.35
                 },
                 "UPX2": {
                     "sizeofrawdata": "00000200",
@@ -79,7 +81,8 @@ const About = () => {
                     "virtualaddress": "00026000",
                     "execute": 0,
                     "read": 1,
-                    "write": 1
+                    "write": 1,
+                    "average_entropy": 4.13
                 }
             },
             "overlay": {
@@ -177,6 +180,14 @@ const About = () => {
                 "suspicious": [
                     "upx"
                 ]
+            },
+            "entropy": {
+                "level": "warning",
+                "sections": [
+                    "UPX0",
+                    "UPX1"
+                ],
+                "comment": "File has one or more high entropy sections. This could be indicative of encrypted content."
             }
         }
     };
@@ -240,20 +251,6 @@ const About = () => {
     // Your Next.js component file
 
 // Assuming you have access to jsonData.average_entropy_per_section and jsonData.pe_header.sections
-    const averageEntropyData = jsonData.average_entropy_per_section;
-    const sectionsData = jsonData.pe_header.sections;
-
-    const combinedData = Object.keys(sectionsData).reduce((result: any, key: any) => {
-        if (averageEntropyData[key]) {
-            result[key] = {
-                ...sectionsData[key],
-                average_entropy: parseFloat(averageEntropyData[key].toFixed(2)),
-        };
-    }
-        return result;
-    }, 
-    {});
-
     const dummyData = {
         verdict: 'File clean',
         comment: 'No threat markers were found.',
@@ -270,8 +267,9 @@ const About = () => {
             <CollapsiblePanel title="Header info" type="default" text="">
                 <RenderTable data={headerInfo}/>
             </CollapsiblePanel>
-            <CollapsiblePanel title="Sections" type="default" text="">
-                <ClassicTable sections={combinedData}/>
+            <CollapsiblePanel title="Sections" type={jsonData.verdict.entropy.level} text="">
+                <ClassicTable sections={jsonData.pe_header.sections} suspicious={jsonData.verdict.entropy.sections}/>
+                <CommentText type={jsonData.verdict.entropy.level} text={jsonData.verdict.entropy.comment}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Overlay info" type="default" text="">
                 <RenderTable data={overlayInfo}/>
@@ -280,7 +278,7 @@ const About = () => {
                 <EntropyGraph sections={jsonData.pe_header.sections} entropyBlocks={jsonData.entropy_blocks} entropySectionRanges={jsonData.entropy_section_ranges}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Signatures" type={jsonData.verdict.signatures.level} text="">
-                <RenderTable data={signatures.Signatures}/>
+                <RenderTable data={signatures.Signatures} headers={['Signature name', 'Type']}/>
                 <CommentText type={jsonData.verdict.signatures.level} text={jsonData.verdict.signatures.comment}/>
             </CollapsiblePanel>
         </div>

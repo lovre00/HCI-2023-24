@@ -8,7 +8,7 @@ const VerdictPanel = ({ status, data }: any) => {
   switch (status) {
     case 'warning':
       panelTheme = styles.warningPanel;
-      imageSource = "https://i.postimg.cc/BbVgZFNm/ok.png"; // Replace with your warning sign image URL
+      imageSource = "https://i.postimg.cc/g2LkrN01/warning-big.png"; // Replace with your warning sign image URL
       break;
     case 'error':
       panelTheme = styles.errorPanel;
