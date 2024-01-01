@@ -7,7 +7,7 @@ Chart.register(
 );
 
 
-const EntropyGraph = ({ sections, entropyBlocks, entropySectionRanges }) => {
+const EntropyGraph = ({ sections, entropyBlocks, entropySectionRanges }: any) => {
   const chartContainer = useRef(null);
   const chartInstance = useRef(null);
 
