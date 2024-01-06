@@ -1,6 +1,6 @@
 import BlogPostCard from './BlogPostCard'; // Replace this with the correct path to your BlogPostCard component
 
-const BlogPostContainer = ({ posts }) => {
+const BlogPostContainer = ({ posts }: any) => {
   return (
     <div className="blog-post-container">
       {posts.map((post, index) => (
