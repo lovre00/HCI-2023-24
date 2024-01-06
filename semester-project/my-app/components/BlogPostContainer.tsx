@@ -3,7 +3,7 @@ import BlogPostCard from './BlogPostCard'; // Replace this with the correct path
 const BlogPostContainer = ({ posts }: any) => {
   return (
     <div className="blog-post-container">
-      {posts.map((post, index) => (
+      {posts.map((post: any, index: any) => (
         <BlogPostCard key={index} post={post} />
       ))}
 
