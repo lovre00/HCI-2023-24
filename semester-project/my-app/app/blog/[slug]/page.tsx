@@ -1,8 +1,8 @@
 'use client';
-import { useState } from 'react';
-import BlogPostCard from '../../components/BlogPostCard'
-import Navbar from '../../components/Navbar'
-import BlogPostContainer from '@/components/BlogPostContainer';
+import { usePathname } from 'next/navigation';
+import BlogPost from '../../../components/BlogPost';
+import Navbar from '../../../components/Navbar';
+import ExcaliburComponent from '@/components/Logo';
 
 const postsData = [
   {
@@ -95,70 +95,19 @@ const postsData = [
   }
 ];
 
-const Blog = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTag, setSelectedTag] = useState('');
+const BlogPostPage = () => {
+  const slug = usePathname();
 
-  const filteredPosts = postsData.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedTag ? post.tag === selectedTag : true)
-  );
-
+  // Find the post data based on the slug
+  const post = postsData.find((p) => "/blog/" + p.slug ==  slug) || {};
+  console.log(post)
   return (
-    <div className="blog-container">
-      <Navbar />
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search by title"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-box"
-        />
-        <select
-          value={selectedTag}
-          onChange={(e) => setSelectedTag(e.target.value)}
-          className="tag-select"
-        >
-          <option value="">All Tags</option>
-          {/* Logic to get unique tags from postsData */}
-          {/* Replace with your logic */}
-          <option value="Technology">Technology</option>
-          {/* Add more tags here */}
-        </select>
-      </div>
-      <BlogPostContainer posts={filteredPosts} />
-
-      <style jsx>{`
-        .blog-container {
-          /* Your existing styles */
-        }
-
-        .search-container {
-          text-align: center;
-          margin-bottom: 20px;
-        }
-
-        .search-box,
-        .tag-select {
-          padding: 10px;
-          font-size: 16px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          margin-right: 10px;
-        }
-
-        .search-box {
-          width: 300px;
-          /* Add additional styles if needed */
-        }
-
-        .tag-select {
-          /* Add additional styles if needed */
-        }
-      `}</style>
+    <div>
+      <Navbar/>
+      <ExcaliburComponent/>
+       <BlogPost post={post} />;
     </div>
-  );
+  )
 };
 
-export default Blog;
+export default BlogPostPage;

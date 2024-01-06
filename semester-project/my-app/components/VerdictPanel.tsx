@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './VerdictPanel.module.css'; // Import your CSS file
 
 const VerdictPanel = ({ status, data }: any) => {
+  const [showPanel, setShowPanel] = useState(false);
+
+  useEffect(() => {
+    // Use a delay to set the showPanel state after a certain time to trigger the transition effect
+    const timeout = setTimeout(() => {
+      setShowPanel(true);
+    }, 100); // Adjust the delay time as needed
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   let panelTheme = '';
   let imageSource = '';
 
   switch (status) {
     case 'warning':
       panelTheme = styles.warningPanel;
-      imageSource = "https://i.postimg.cc/g2LkrN01/warning-big.png"; // Replace with your warning sign image URL
+      imageSource = "https://i.postimg.cc/3RwdQvfY/warning-big.png"; // Replace with your warning sign image URL
       break;
-    case 'error':
-      panelTheme = styles.errorPanel;
-      imageSource = '/error-sign.png'; // Replace with your error sign image URL
+    case 'critical':
+      panelTheme = styles.criticalPanel;
+      imageSource = 'https://i.postimg.cc/QCqRmt5P/critical-big.png'; // Replace with your error sign image URL
       break;
     case 'ok':
       panelTheme = styles.okPanel;
-      imageSource = 'https://i.postimg.cc/kMN3zxdc/Ionicons-checkmark-circle-svg.png'; // Replace with your OK sign image URL
+      imageSource = 'https://i.postimg.cc/85B9Hcgv/info-big.png'; // Replace with your OK sign image URL
       break;
     default:
       panelTheme = styles.defaultPanel;
@@ -25,7 +36,7 @@ const VerdictPanel = ({ status, data }: any) => {
   }
 
   return (
-    <div className={`${styles.panel} ${panelTheme}`}>
+    <div className={`${styles.panel} ${showPanel ? styles.show : ''} ${panelTheme}`}>
       <div className={styles.imageContainer}>
         <img src={imageSource} alt="Status" className={styles.statusImage}/>
       </div>
@@ -41,6 +52,13 @@ const VerdictPanel = ({ status, data }: any) => {
         <div className={styles.value}>{data.suggestions}</div>
         {/* Add more labels and values as needed */}
       </div>
+      <style jsx>{`
+        /* Added CSS for transition effect */
+        .show.panel.show {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
     </div>
   );
 };

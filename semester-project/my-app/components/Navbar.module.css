@@ -1,37 +1,53 @@
 .navbar {
-    background-color: #ffffff;
-    color: rgb(7, 7, 7);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .navList {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navItem {
-  }
-  
-  .navLink {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-  }
-  
+  background-color: #2563EB; /* Blue panel color */
+  color: #ffffff;
+  height: 40x;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
+}
+
+.logo {
+  color: #ffffff;
+  margin-right: auto;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  margin-right: 15px;
+}
+
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .navButton {
-  height: 60px;
+  height: 100%;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  padding: 12px 16px;
   transition: background-color 0.3s ease;
+  padding: 12px 16px;
 }
 
 .navButton:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(37, 99, 235)
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.signIn {
+  margin-left: auto;
+  color: #ffffff;
 }

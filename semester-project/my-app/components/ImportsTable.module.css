@@ -1,0 +1,66 @@
+.jsontable {
+  border-collapse: collapse; /* Let the table adjust its width based on content */
+  width: 100%;/* Set a maximum width to prevent excessive stretching */
+  margin: auto;
+  font-size: 14px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.jsontable th {
+  padding: 8px;
+  background-color: #f0f0f0;
+}
+
+.jsontable td {
+  border: none;
+  padding: 6px;
+}
+
+.jsontable tbody tr:nth-child(even) {
+  background-color: #f3f1f1; /* Define the color for even rows */
+}
+
+.label {
+  font-weight: bold;
+}
+
+.default {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 50%; /* Set the width to 50% or adjust as needed */
+  border-radius: 5px; /* Rounded borders */
+  overflow: hidden; /* Hide content overflow */
+}
+
+/* Responsive styles for smaller screens */
+/* Your existing CSS */
+@media screen and (max-width: 600px) {
+  .jsontable {
+    width: 100%;
+    table-layout: auto; /* Adjust table layout for smaller screens */
+    border: none;
+  }
+
+  .jsontable th {
+    padding: 8px;
+    background-color: #f0f0f0;
+    display: none;
+  }
+  
+  .jsontable td {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    padding: 6px 0;
+  }
+
+  .jsontable tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  .jsontable td:last-child {
+    border-bottom: none;
+  }
+}

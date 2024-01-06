@@ -9,6 +9,14 @@
     margin-bottom: 15px;
     width: 100%;
     max-width: 900px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+
+  .show.panel.show {
+    opacity: 1;
+    transform: translateY(0);
   }
   
   /* Default panel styles */
@@ -20,15 +28,17 @@
   /* Warning panel styles */
   .warningPanel {
     /* Add warning panel styles here */
-    background-color: #ffe57f; /* Example background color */
+    background-color: #fcf2cf; /* Example background color */
     border: 1px solid #ffcc00;
-    color: #917320;
+    color: #c27012;
   }
   
   /* Error panel styles */
-  .errorPanel {
+  .criticalPanel {
     /* Add error panel styles here */
-    background-color: #ef5350; /* Example background color */
+    background-color: #ffd7d1; /* Example background color */
+    border: 1px solid #ff0000;
+    color: #b12929;
   }
   
   /* OK panel styles */

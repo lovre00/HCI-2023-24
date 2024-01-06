@@ -57,11 +57,12 @@ const EntropyGraph = ({ sections, entropyBlocks, entropySectionRanges }: any) =>
                   id: `line-${index}`,
                   mode: 'vertical',
                   scaleID: 'x',
+                  display: false,
                   value: `${point}`,
                   borderColor: 'black',
                   borderWidth: 1,
                   label: {
-                    display: true,
+                    display: false,
                     content,
                   },
                   yMax: entropyBlocks[point - 1]

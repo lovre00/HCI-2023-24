@@ -1,9 +1,19 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Panel.module.css';
 
 const CollapsiblePanel = ({ title, type, text, children }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [showPanel, setShowPanel] = useState(false);
+
+  useEffect(() => {
+    // Use a delay to set the showPanel state after a certain time to trigger the transition effect
+    const timeout = setTimeout(() => {
+      setShowPanel(true);
+    }, 100); // Adjust the delay time as needed
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -14,11 +24,14 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
 
   if (type == 'warning') {
     panelType = "warningpanel";
-    icon = 'https://i.postimg.cc/d17YgmV9/warning-small.png';
+    icon = 'https://i.postimg.cc/3RwdQvfY/warning-big.png';
+  } else if (type == 'warning-special'){
+    panelType = "specialpanel";
+    icon = 'https://i.postimg.cc/50sbfHhS/info.png';
   }
 
   return (
-    <div className={panelType}>
+    <div className={`${panelType} ${showPanel ? 'show' : ''}`}>
       <div className={type} onClick={toggleCollapse}>
         <div className="title">
           {icon && <img src={icon} alt={`${type} icon`} className="icon" />}{title}
@@ -31,6 +44,21 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
         </div>
       )}
       <style jsx>{`
+        /* Your existing CSS styles remain unchanged */
+
+        /* Added CSS for transition effect */
+        .defaultpanel,
+        .warningpanel {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .show.defaultpanel.show,
+        .show.warningpanel.show {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
         .icon {
           margin-right: 5px;
           max-width: 20px;
@@ -56,9 +84,43 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           max-width: 900px;
         }
 
+        .specialpanel {
+          border: 2px dashed #0000ff;
+          margin-bottom: 10px;
+          width: 100%; /* Set the width to 50% or adjust as needed */
+          border-radius: 5px; /* Rounded borders */
+          overflow: hidden; /* Hide content overflow */
+          align-items: center;
+          max-width: 900px;
+        }
+
+        .criticalpanel {
+          border: 1px solid #ff0000;
+          margin-bottom: 10px;
+          width: 100%; /* Set the width to 50% or adjust as needed */
+          border-radius: 5px; /* Rounded borders */
+          overflow: hidden; /* Hide content overflow */
+          align-items: center;
+          max-width: 900px;
+        }
+
         @media screen and (max-width: 600px) {
           .defaultpanel {
             border: 1px solid #ccc;
+            margin-bottom: 10px;
+            width: 90%; /* Set the width to 50% or adjust as needed */
+            border-radius: 5px; /* Rounded borders */
+            overflow: hidden; /* Hide content overflow */
+          }
+          .warningpanel {
+            border: 1px solid #ffcc00;
+            margin-bottom: 10px;
+            width: 90%; /* Set the width to 50% or adjust as needed */
+            border-radius: 5px; /* Rounded borders */
+            overflow: hidden; /* Hide content overflow */
+          }
+          .criticalpanel {
+            border: 1px solid #ffcc00;
             margin-bottom: 10px;
             width: 90%; /* Set the width to 50% or adjust as needed */
             border-radius: 5px; /* Rounded borders */
@@ -79,9 +141,17 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           align-items: center;
           padding: 10px;
           cursor: pointer;
-          background-color: #ffe57f; /* Color of the upper part of the panel */
+          background-color: #fcf2cf; /* Color of the upper part of the panel */
         }
-        .error {
+        .warning-special {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          cursor: pointer;
+          background-color: #f0f0ff; /* Color of the upper part of the panel */
+        }
+        .critical{
           border: 1px solid #ccc;
           margin-bottom: 10px;
           width: 50%; /* Set the width to 50% or adjust as needed */

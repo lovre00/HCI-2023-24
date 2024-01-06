@@ -8,6 +8,7 @@ import ClassicTable from "@/components/ClassicTable";
 import EntropyGraph from "@/components/EntropyGraph";
 import RenderTable from "@/components/RenderTable";
 import CommentText from "@/components/CommentText";
+import ImportsTable from "@/components/ImportsTable";
 
 const About = () => {
     const jsonData = {
@@ -263,7 +264,7 @@ const About = () => {
         <Navbar />
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <ExcaliburComponent/>
-            <VerdictPanel status="ok" data={dummyData}/>
+            <VerdictPanel status="warning" data={dummyData}/>
             <CollapsiblePanel title="Header info" type="default" text="">
                 <RenderTable data={headerInfo}/>
             </CollapsiblePanel>
@@ -271,16 +272,26 @@ const About = () => {
                 <ClassicTable sections={jsonData.pe_header.sections} suspicious={jsonData.verdict.entropy.sections}/>
                 <CommentText type={jsonData.verdict.entropy.level} text={jsonData.verdict.entropy.comment}/>
             </CollapsiblePanel>
-            <CollapsiblePanel title="Overlay info" type="default" text="">
-                <RenderTable data={overlayInfo}/>
-            </CollapsiblePanel>
             <CollapsiblePanel title="Entropy graph" type="default" text="">
                 <EntropyGraph sections={jsonData.pe_header.sections} entropyBlocks={jsonData.entropy_blocks} entropySectionRanges={jsonData.entropy_section_ranges}/>
+            </CollapsiblePanel>
+            <CollapsiblePanel title="Import table" type="default" text="">
+                <ImportsTable imports={jsonData.pe_header.imports} malapiImportCheck={jsonData.malapi_import_check}/>
+            </CollapsiblePanel>
+            <CollapsiblePanel title="Overlay info" type="default" text="">
+                <RenderTable data={overlayInfo}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Signatures" type={jsonData.verdict.signatures.level} text="">
                 <RenderTable data={signatures.Signatures} headers={['Signature name', 'Type']}/>
                 <CommentText type={jsonData.verdict.signatures.level} text={jsonData.verdict.signatures.comment}/>
             </CollapsiblePanel>
+            
+            {jsonData["upx_custom_scan: "] && (
+                <CollapsiblePanel title="UPX custom scan" type="warning-special" text="">
+                    <RenderTable data={jsonData["upx_custom_scan: "]} headers={['Name', 'Value']}/>
+                    <CommentText type="warning" text="Test"/>
+                </CollapsiblePanel>
+            )}
         </div>
         </div>
       );
