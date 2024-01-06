@@ -49,16 +49,15 @@ const ImportsTable: React.FC<ImportsTableProps> = ({ imports, malapiImportCheck 
     );
   };
 
-  const tableStyle = {
+  const tableStyle: React.CSSProperties = {
     borderSpacing: '0',
-    borderCollapse: 'collapse',
+    borderCollapse: 'collapse', // Specify the correct values for borderCollapse
     width: '100%',
     marginTop: '15px',
     borderRadius: '8px',
     overflow: 'hidden',
     border: '1px solid #ccc', // Add border to the main table
   };
-
   const renderImportsTable = () => {
     const rows = Object.keys(imports).map((dllName, index) => {
       const functions = imports[dllName].map((funcName: string) => (
