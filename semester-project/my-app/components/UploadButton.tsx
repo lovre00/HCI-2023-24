@@ -14,7 +14,8 @@ const UploadButton = () => {
       const inputElement = document.createElement('input');
       inputElement.type = 'file';
       inputElement.onchange = (event) => {
-        if (event.target.files && event.target.files.length > 0) {
+        const target = event.target as HTMLInputElement; // Type assertion
+        if (target && target.files && target.files.length > 0) {
           setChosen(true);
         }
       };
