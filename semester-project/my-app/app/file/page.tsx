@@ -264,7 +264,7 @@ const About = () => {
         <Navbar />
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <ExcaliburComponent/>
-            <VerdictPanel status="warning" data={dummyData}/>
+            <VerdictPanel status="ok" data={dummyData}/>
             <CollapsiblePanel title="Header info" type="default" text="">
                 <RenderTable data={headerInfo}/>
             </CollapsiblePanel>
@@ -276,7 +276,7 @@ const About = () => {
                 <EntropyGraph sections={jsonData.pe_header.sections} entropyBlocks={jsonData.entropy_blocks} entropySectionRanges={jsonData.entropy_section_ranges}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Import table" type="default" text="">
-                <ImportsTable imports={jsonData.pe_header.imports} malapiImportCheck={jsonData.malapi_import_check}/>
+                <ImportsTable importsData={jsonData.pe_header.imports} malapiImportCheckData={jsonData.malapi_import_check}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Overlay info" type="default" text="">
                 <RenderTable data={overlayInfo}/>

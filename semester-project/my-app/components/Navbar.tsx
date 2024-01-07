@@ -6,8 +6,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <div className={styles.logo}>
-          {/* Placeholder for your logo */}
-          Logo
+          <img src="https://i.postimg.cc/Sxf7r8Hr/logo.png" width="32"/>
         </div>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
@@ -20,7 +19,7 @@ const Navbar = () => {
           <li className={styles.navItem}>
             <Link legacyBehavior href="/blog">
               <a className={styles.navLink}>
-                <button className={styles.navButton}>Blog</button>
+                <button className={styles.navButton}>Documentation</button>
               </a>
             </Link>
           </li>

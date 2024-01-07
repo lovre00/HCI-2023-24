@@ -48,15 +48,20 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
 
         /* Added CSS for transition effect */
         .defaultpanel,
-        .warningpanel {
+        .warningpanel,
+        .specialpanel {
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+          overflow: hidden;
+
         }
         .show.defaultpanel.show,
+        .show.specialpanel.show,
         .show.warningpanel.show {
           opacity: 1;
           transform: translateY(0);
+          transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
         .icon {
@@ -121,6 +126,12 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           }
           .criticalpanel {
             border: 1px solid #ffcc00;
+            margin-bottom: 10px;
+            width: 90%; /* Set the width to 50% or adjust as needed */
+            border-radius: 5px; /* Rounded borders */
+            overflow: hidden; /* Hide content overflow */
+          }
+          .specialpanel {
             margin-bottom: 10px;
             width: 90%; /* Set the width to 50% or adjust as needed */
             border-radius: 5px; /* Rounded borders */

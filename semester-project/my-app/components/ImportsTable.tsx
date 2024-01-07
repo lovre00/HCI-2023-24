@@ -1,48 +1,77 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-interface ImportsTableProps {
-  imports: any;
-  malapiImportCheck: any;
-}
+const ImportsTable = ({ importsData, malapiImportCheckData }: any) => {
+  const generateTableRows = () => {
+    const rows: JSX.Element[] = [];
 
-const ImportsTable: React.FC<ImportsTableProps> = ({ imports, malapiImportCheck }: ImportsTableProps) => {
-  const [expanded, setExpanded] = useState<string[]>([]);
+    for (const dll in importsData) {
+      importsData[dll].forEach((func: any, index: any) => {
+        const malapiData = malapiImportCheckData[func];
 
-  const togglePanel = (funcName: string) => {
-    setExpanded((prevExpanded) =>
-      prevExpanded.includes(funcName) ? prevExpanded.filter((item) => item !== funcName) : [...prevExpanded, funcName]
-    );
+        if (malapiData) {
+          rows.push(
+            <tr key={`${func}-${dll}`}>
+              <td style={cellStyle}>
+                <FunctionPanel func={func} malapiData={malapiData} dll={dll} />
+              </td>
+            </tr>
+          );
+        } else {
+          rows.push(
+            <tr key={`${func}-${dll}`}>
+              <td style={nonMalapiDataCellStyle}>
+              &nbsp;{func} <br />
+                <span style={nonMalapiDll}>{dll}</span>
+              </td>
+            </tr>
+          );
+        }
+      });
+    }
+
+    return rows;
   };
 
-  const renderFunctionPanel = (funcName: string) => {
-    const functionData = malapiImportCheck[funcName];
-    const isExpanded = expanded.includes(funcName);
-    const hasDescription = functionData && functionData.description;
+  const FunctionPanel = ({ func, malapiData, dll }: any) => {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
+    const togglePanel = () => {
+      setIsExpanded(!isExpanded);
+    };
+
+    const panelStyle: React.CSSProperties = {
+      backgroundColor: '#f2f2f2',
+      borderRadius: '8px',
+      padding: '8px',
+      cursor: 'pointer',
+      border: '1px solid #ddd',
+    };
+
+    const infoStyle: React.CSSProperties = {
+      fontSize: '12px',
+      color: '#dd6600',
+    };
+
+    const descriptionStyle: React.CSSProperties = {
+      fontSize: '12px',
+    };
 
     return (
-      <div
-        key={funcName}
-        style={{
-          border: '1px solid #ccc',
-          padding: '10px',
-          marginBottom: '5px',
-          cursor: hasDescription ? 'pointer' : 'not-allowed',
-          borderRadius: '8px',
-        }}
-        onClick={() => hasDescription && togglePanel(funcName)}
-      >
+      <div style={panelStyle} onClick={togglePanel}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>
-            {funcName}
-            {functionData && functionData.info && (
-              <span style={{ fontSize: '12px', color: '#888', display: 'block' }}>{functionData.info}</span>
-            )}
-          </span>
-          {hasDescription && <span style={{ fontSize: '18px' }}>{isExpanded ? '-' : '+'}</span>}
+          <span style={{ marginLeft: '5px' }}>{func}</span>
+          <span>{isExpanded ? '-' : '+'}</span>
         </div>
-        {isExpanded && hasDescription && (
-          <div style={{ marginTop: '5px', wordWrap: 'break-word', fontSize: '14px' }}>
-            <strong>Description:</strong> {functionData.description}
+        <span style={nonMalapiDll}>{dll}</span>
+        {isExpanded && (
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: '5px', padding: '5px' }}>
+            <img src="https://i.postimg.cc/d17YgmV9/warning-small.png" width="16" style={{ marginRight: '5px' }} />
+            <span style={infoStyle}>{malapiData.info}</span>
+          </div>
+        )}
+        {isExpanded && (
+          <div style={{ padding: '0px 5px 0' }}>
+            <span style={descriptionStyle}>{malapiData.description}</span>
           </div>
         )}
       </div>
@@ -50,42 +79,44 @@ const ImportsTable: React.FC<ImportsTableProps> = ({ imports, malapiImportCheck 
   };
 
   const tableStyle: React.CSSProperties = {
-    borderSpacing: '0',
-    borderCollapse: 'collapse', // Specify the correct values for borderCollapse
+    fontFamily: 'Arial, sans-serif',
+    borderCollapse: 'collapse',
     width: '100%',
-    marginTop: '15px',
-    borderRadius: '8px',
-    overflow: 'hidden',
-    border: '1px solid #ccc', // Add border to the main table
+    border: '1px solid #ddd',
+    fontSize: '14px', // Reduced font size by 1
   };
-  const renderImportsTable = () => {
-    const rows = Object.keys(imports).map((dllName, index) => {
-      const functions = imports[dllName].map((funcName: string) => (
-        <div key={funcName}>{renderFunctionPanel(funcName)}</div>
-      ));
 
-      return (
-        <tr key={dllName} style={{ background: index % 2 === 0 ? '#f5f5f5' : 'white' }}>
-          <td style={{ border: '1px solid #ccc', padding: '8px', minWidth: '150px' }}>{dllName}</td>
-          <td style={{ border: '1px solid #ccc', padding: '8px', maxWidth: '400px' }}>{functions}</td>
+  const cellStyle: React.CSSProperties = {
+    border: '1px solid #ddd',
+    padding: '8px',
+    textAlign: 'left',
+  };
+
+  const nonMalapiDataCellStyle: React.CSSProperties = {
+    ...cellStyle,
+    padding: '15px', // Add small padding for functions without malapi entry
+  };
+  
+
+  const nonMalapiDll: React.CSSProperties = {
+    textAlign: 'right',
+    color: '#777',
+    fontSize: '11px',
+    padding: '6px',
+  };
+
+  return (
+    <table className="table" style={tableStyle}>
+      <thead>
+        <tr>
+         
         </tr>
-      );
-    });
-
-    return (
-      <table style={tableStyle}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>DLL</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Functions</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-    );
-  };
-
-  return <div>{renderImportsTable()}</div>;
+      </thead>
+      <tbody>
+        {generateTableRows()}
+      </tbody>
+    </table>
+  );
 };
 
 export default ImportsTable;
