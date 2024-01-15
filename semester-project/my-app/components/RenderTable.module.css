@@ -18,7 +18,7 @@
 }
 
 .jsontable tbody tr:nth-child(even) {
-  background-color: #f8f6f6; /* Define the color for even rows */
+  background-color: #f3f3f3; /* Define the color for even rows */
 }
 
 .label {

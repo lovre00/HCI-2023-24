@@ -22,7 +22,7 @@ const RenderTable: React.FC<RenderTableProps> = ({ data, headers }: RenderTableP
         <tbody>
           {Object.keys(jsonData).map((key) => (
             <tr key={key} className="data-row">
-              <td className="font-bold text-sm text-stone-700">{key}</td>
+              <td className="text-sm text-stone-700">{key}</td>
               <td className="value text-sm text-right">
                 {typeof jsonData[key] === 'object' ? (
                   // Render nested object or array

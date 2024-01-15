@@ -135,6 +135,7 @@ const Blog = () => {
         }
 
         .search-container {
+          padding-top: 50px;
           text-align: center;
           margin-bottom: 20px;
         }
