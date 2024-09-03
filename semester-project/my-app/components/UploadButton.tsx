@@ -37,7 +37,7 @@ const UploadButton = () => {
 
       if (currentProgress >= 100) {
         clearInterval(interval);
-        router.push('/file?status=ok'); // Redirect to '/file' after progress completes
+        router.push('/file/ok'); // Redirect to '/file' after progress completes
       } else if (currentProgress >= 50) {
         setTextColor('text-white'); // Change text color to white
       }

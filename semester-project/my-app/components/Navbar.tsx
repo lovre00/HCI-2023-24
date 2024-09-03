@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
 
   const navigateToFile = (status: string): void => {
     if (status) {
-      window.location.href = `/file?status=${status}`;
+      window.location.href = `/file/${status}`;
     }
   };
 

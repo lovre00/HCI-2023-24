@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './ClassicTable.module.css';
+import warningSmall from '../assets/warning-small.png';
+import Image from "next/image"
 
 const ClassicTable = ({ sections, suspicious }: any) => {
   const sectionKeys = Object.keys(sections);
@@ -42,12 +44,13 @@ const ClassicTable = ({ sections, suspicious }: any) => {
               <td className={`${styles.tableCell} text-center`} style={{ position: 'relative' }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center' }}>
                   {isInList(sectionKey) && (
-                    <img
-                      src="https://i.postimg.cc/d17YgmV9/warning-small.png"
-                      alt="Warning"
-                      width="16"
-                      style={{ verticalAlign: 'middle', marginRight: '5px' }}
-                    />
+                    <Image
+                    src={warningSmall}
+                    alt="Warning"
+                    width={16}
+                    height={16}
+                    style={{ verticalAlign: 'middle', marginRight: '5px' }}
+                  />
                   )}
                   {sections[sectionKey].average_entropy}
                 </div>

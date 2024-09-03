@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import CollapsiblePanel from "@/components/Panel";
 import Navbar from "@/components/Navbar";
 import ExcaliburComponent from "@/components/Logo";
@@ -15,8 +15,7 @@ import CustomScanPanels from '@/components/CustomScanPanels';
 import { redirect } from 'next/navigation'
 
 const Results = () => {
-    const searchParams = useSearchParams();
-    const status = searchParams.get('status');
+    let {status} = useParams();
 
     // Define different dummyData based on status
     let dummyData;
