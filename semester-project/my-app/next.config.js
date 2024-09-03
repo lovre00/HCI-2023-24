@@ -6,4 +6,14 @@ module.exports = {
         importLoaders: 1,
         localIdentName: "[]",
     },
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'postimage.org',
+            port: '',
+            pathname: '',
+          },
+        ],
+      },
  };

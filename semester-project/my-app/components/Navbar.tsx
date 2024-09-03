@@ -1,39 +1,112 @@
-'use client'
-import React, { useState } from 'react';
+'use client';
+import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
+import { FaSearch, FaHome, FaBook, FaRss, FaInfoCircle, FaEnvelope } from 'react-icons/fa'; // Import icons
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const statuses: string[] = ["ok", "warning", "critical"];
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    if (query) {
+      const filteredSuggestions = statuses.filter(status =>
+        status.includes(query)
+      );
+      setSuggestions(filteredSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion: string): void => {
+    setSearchQuery(suggestion);
+    setSuggestions([]);
+    navigateToFile(suggestion);
+  };
+
+  const navigateToFile = (status: string): void => {
+    if (status) {
+      window.location.href = `/file?status=${status}`;
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter' && searchQuery) {
+      navigateToFile(searchQuery);
+    }
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        <div className={styles.logo}>
-          <img src="https://i.postimg.cc/Sxf7r8Hr/logo.png" alt="logo" width="32"/>
+        <Link href="/" className={styles.logo}><img src="https://i.postimg.cc/Sxf7r8Hr/logo.png" alt="logo" width="32"/></Link>
+        <div className={styles.searchContainer}>
+          <FaSearch className={styles.searchIcon} />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            onKeyDown={handleKeyDown}
+            className={styles.searchInput}
+            placeholder="Search..."
+          />
+          {suggestions.length > 0 && (
+            <ul className={styles.suggestionsList}>
+              {suggestions.map(suggestion => (
+                <li
+                  key={suggestion}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  className={styles.suggestionItem}
+                >
+                  {suggestion}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-
-        <div className={styles.hamburger} onClick={toggleMenu}>
+        <button className={styles.hamburger} onClick={toggleMenu}>
           <div></div>
           <div></div>
           <div></div>
-        </div>
-
-        <ul className={`${styles.navList} ${isOpen ? styles.showMenu : ''}`}>
-          {/* Navigation Items */}
-          <li className={styles.navItem}><Link href="/" legacyBehavior><a className={styles.navLink}><button className={styles.navButton}>Home</button></a></Link></li>
-          <li className={styles.navItem}><Link href="/documentation" legacyBehavior><a className={styles.navLink}><button className={styles.navButton}>Documentation</button></a></Link></li>
-          <li className={styles.navItem}><Link href="/blog" legacyBehavior><a className={styles.navLink}><button className={styles.navButton}>Blog</button></a></Link></li>
-          <li className={styles.navItem}><Link href="/about" legacyBehavior><a className={styles.navLink}><button className={styles.navButton}>About</button></a></Link></li>
-          <li className={styles.navItem}><Link href="/contact" legacyBehavior><a className={styles.navLink}><button className={styles.navButton}>Contact</button></a></Link></li>
-          {/* Sign-In Button */}
-          <li className={styles.navItem}><div className={styles.signIn}>Sign In</div></li>
+        </button>
+        <ul className={`${styles.navList} ${isOpen ? styles.showMenu : styles.hideMenu}`}>
+          <li className={styles.navItem}>
+            <Link href="/" className={styles.navLink}>
+              <FaHome className={styles.icon} />
+              <span className={styles.text}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/blog" className={styles.navLink}>
+              <FaRss className={styles.icon} />
+              <span className={styles.text}>Blog</span>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/contact" className={styles.navLink}>
+              <FaEnvelope className={styles.icon} />
+              <span className={styles.text}>Contact</span>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/about" className={styles.navLink}>
+              <FaInfoCircle className={styles.icon} />
+              <span className={styles.text}>About</span>
+            </Link>
+          </li>
         </ul>
       </div>
+      {isOpen && <div className={styles.overlay} onClick={toggleMenu}></div>}
     </nav>
   );
 };

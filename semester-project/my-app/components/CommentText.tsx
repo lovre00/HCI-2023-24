@@ -7,10 +7,10 @@ const CommentText = ({ type, text }: any) => {
   // Determine which icon to display based on the type
   switch (type) {
     case 'info':
-      icon = <div className={styles.icon}>ℹ️</div>; // Replace with your info icon component or icon source
+      icon = <div className={styles.icon}><img src="https://i.postimg.cc/50sbfHhS/info.png" width="15"/></div>; // Replace with your info icon component or icon source
       break;
     case 'warning':
-      icon = <div className={styles.icon}><img src="https://i.postimg.cc/d17YgmV9/warning-small.png" width="16"/></div>; // Replace with your warning icon component or icon source
+      icon = <div className={styles.icon}><img src="https://i.postimg.cc/d17YgmV9/warning-small.png" width="13"/></div>; // Replace with your warning icon component or icon source
       break;
     case 'error':
       icon = <div className={styles.icon}>❌</div>; // Replace with your error icon component or icon source

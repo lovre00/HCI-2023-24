@@ -49,7 +49,8 @@
                 "virtualaddress": "00001000",
                 "execute": 1,
                 "read": 1,
-                "write": 1
+                "write": 1,
+                "average_entropy": 6.96
             },
             "UPX1": {
                 "sizeofrawdata": "00007200",
@@ -58,7 +59,8 @@
                 "virtualaddress": "0001e000",
                 "execute": 1,
                 "read": 1,
-                "write": 1
+                "write": 1,
+                "average_entropy": 7.35
             },
             "UPX2": {
                 "sizeofrawdata": "00000200",
@@ -67,7 +69,8 @@
                 "virtualaddress": "00026000",
                 "execute": 0,
                 "read": 1,
-                "write": 1
+                "write": 1,
+                "average_entropy": 4.13
             }
         },
         "overlay": {
@@ -87,6 +90,41 @@
             ]
         }
     },
+    "entropy_blocks": [
+        6.969501131095436,
+        7.765328649348594,
+        7.822987910836119,
+        7.691413522779435,
+        7.726291223748266,
+        7.700288131171253,
+        7.679609402770389,
+        7.688107369848876,
+        7.375109747681993,
+        7.058858326761931,
+        7.575596964362251,
+        7.741051634044913,
+        7.701955736026692,
+        7.689536693037515,
+        4.133989302174741,
+        2.489485920839509,
+        2.7301101588845342,
+        2.7450122952765077,
+        2.5838844455264347,
+        3.539422104482652,
+        3.502340192001215,
+        2.922687689344333,
+        3.354448781915441,
+        3.4037438339008177,
+        2.9574462868977127,
+        4.132591407768606,
+        4.6755165741236855,
+        4.575784019209747
+    ],
+    "entropy_section_ranges": [
+        0,
+        0,
+        25
+    ],
     "average_entropy_per_section": {
         "UPX0": 6.969501131095436,
         "UPX1": 7.354641716379226,
@@ -95,6 +133,13 @@
     "average_overlay_entropy": 2.8780452662090794,
     "signatures": {
         "upx": "packer"
+    },
+    "packer_info": {
+        "upx": {
+            "text": "UPX is an advanced executable file compressor. UPX will typically reduce the file size of programs and DLLs by around 50%-70%, thus reducing disk space, network load times, download times and other distribution and storage costs. Programs and libraries compressed by UPX are completely self-contained and run exactly as before, with no runtime or memory penalty for most of the supported formats. UPX supports a number of different executable formats, including Windows programs and DLLs, macOS apps and Linux executables.",
+            "url": "https://upx.github.io/",
+            "logo": "https://i.postimg.cc/DfW9P472/image.png"
+        }
     },
     "malapi_import_check": {
         "LoadLibraryA": {
@@ -113,7 +158,7 @@
             "library": "Kernel32.dll"
         }
     },
-    "upx_custom_scan: ": {
+    "upx_custom_scan": {
         "algorithm": "NRV2B_LE32",
         "version": "4.02",
         "strength": "best",
@@ -122,5 +167,22 @@
             "UPX1",
             "UPX2"
         ]
+    },
+    "verdict": {
+        "signatures": {
+            "level": "warning",
+            "comment": "Packer signature detected. Packers can potentially be used to conceal malware.",
+            "suspicious": [
+                "upx"
+            ]
+        },
+        "entropy": {
+            "level": "warning",
+            "sections": [
+                "UPX0",
+                "UPX1"
+            ],
+            "comment": "File has one or more high entropy sections. This could be indicative of encrypted content."
+        }
     }
 }

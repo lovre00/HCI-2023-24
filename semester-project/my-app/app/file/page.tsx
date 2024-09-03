@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import CollapsiblePanel from "@/components/Panel";
 import Navbar from "@/components/Navbar";
 import ExcaliburComponent from "@/components/Logo";
@@ -9,8 +10,41 @@ import EntropyGraph from "@/components/EntropyGraph";
 import RenderTable from "@/components/RenderTable";
 import CommentText from "@/components/CommentText";
 import ImportsTable from "@/components/ImportsTable";
+import CustomScanTable from "@/components/CustomScanTable";
+import CustomScanPanels from '@/components/CustomScanPanels';
+import { redirect } from 'next/navigation'
 
-const About = () => {
+const Results = () => {
+    const searchParams = useSearchParams();
+    const status = searchParams.get('status');
+
+    // Define different dummyData based on status
+    let dummyData;
+    if (status === 'ok') {
+        dummyData = {
+            verdict: 'File clean',
+            comment: 'No threat markers were found.',
+            suggestions: 'No further action is required.',
+            status: 'ok'
+        };
+    } else if (status === 'warning') {
+        dummyData = {
+            verdict: 'Potentially suspicious',
+            comment: 'Some markers indicate potential issues.',
+            suggestions: 'Further analysis is recommended.',
+            status: 'warning'
+        };
+    } else if (status === 'critical') {
+        dummyData = {
+            verdict: 'Malicious',
+            comment: 'Multiple threat markers found.',
+            suggestions: 'Immediate action is required.',
+            status: 'critical'
+        };
+    } else {
+        redirect('/404');
+    }
+
     const jsonData = {
         "pe_header": {
             "machine": "Intel i386",
@@ -147,6 +181,13 @@ const About = () => {
         "signatures": {
             "upx": "packer"
         },
+        "packer_info": {
+            "upx": {
+                text: "UPX is an advanced executable file compressor. UPX will typically reduce the file size of programs and DLLs by around 50%-70%, thus reducing disk space, network load times, download times and other distribution and storage costs. Programs and libraries compressed by UPX are completely self-contained and run exactly as before, with no runtime or memory penalty for most of the supported formats. UPX supports a number of different executable formats, including Windows programs and DLLs, macOS apps and Linux executables.",
+                url: "https://upx.github.io/",
+                logo: "https://i.postimg.cc/DfW9P472/image.png"
+            },
+        },
         "malapi_import_check": {
             "LoadLibraryA": {
                 "description": "LoadLibraryA is used to load a specified module into the address space of the calling process. Malware commonly use this to load DLLs dynamically for evasion purposes.",
@@ -164,7 +205,7 @@ const About = () => {
                 "library": "Kernel32.dll"
             }
         },
-        "upx_custom_scan: ": {
+        "upx_custom_scan": {
             "algorithm": "NRV2B_LE32",
             "version": "4.02",
             "strength": "best",
@@ -233,7 +274,7 @@ const About = () => {
     const overlayInfo = {
         "File size in header": jsonData.pe_header.overlay.pe_size,
         "File size on disk": jsonData.pe_header.overlay.disk_size,
-        Detected: jsonData.pe_header.overlay.detected,
+        Detected: (jsonData.pe_header.overlay.detected == 1) ? "Yes" : "No",
     }
 
     const importInfo = {
@@ -249,24 +290,14 @@ const About = () => {
         Signatures: jsonData.signatures,
     }
 
-    // Your Next.js component file
-
-// Assuming you have access to jsonData.average_entropy_per_section and jsonData.pe_header.sections
-    const dummyData = {
-        verdict: 'File clean',
-        comment: 'No threat markers were found.',
-        suggestions: 'Analyze the report or use deep scan.',
-        // Add more data as needed
-    };
-
       return (
         <div>
         <Navbar />
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <ExcaliburComponent/>
-            <VerdictPanel status="ok" data={dummyData}/>
+            <VerdictPanel status={dummyData.status} data={dummyData}/>
             <CollapsiblePanel title="Header info" type="default" text="">
-                <RenderTable data={headerInfo}/>
+                <CustomScanPanels data={headerInfo}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Sections" type={jsonData.verdict.entropy.level} text="">
                 <ClassicTable sections={jsonData.pe_header.sections} suspicious={jsonData.verdict.entropy.sections}/>
@@ -279,17 +310,17 @@ const About = () => {
                 <ImportsTable importsData={jsonData.pe_header.imports} malapiImportCheckData={jsonData.malapi_import_check}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Overlay info" type="default" text="">
-                <RenderTable data={overlayInfo}/>
+                <CustomScanPanels data={overlayInfo}/>
             </CollapsiblePanel>
             <CollapsiblePanel title="Signatures" type={jsonData.verdict.signatures.level} text="">
-                <RenderTable data={signatures.Signatures} headers={['Signature name', 'Type']}/>
+                <CustomScanTable importsData={signatures.Signatures} malapiImportCheckData={jsonData.packer_info}/>
                 <CommentText type={jsonData.verdict.signatures.level} text={jsonData.verdict.signatures.comment}/>
             </CollapsiblePanel>
             
-            {jsonData["upx_custom_scan: "] && (
+            {jsonData.upx_custom_scan && (
                 <CollapsiblePanel title="UPX custom scan" type="warning-special" text="">
-                    <RenderTable data={jsonData["upx_custom_scan: "]} headers={['Name', 'Value']}/>
-                    <CommentText type="warning" text="Test"/>
+                    <CustomScanPanels data={jsonData.upx_custom_scan}/>
+                    <CommentText type="info" text="Additional data retrieved using custom methods."/>
                 </CollapsiblePanel>
             )}
         </div>
@@ -297,4 +328,4 @@ const About = () => {
       );
 };
 
-export default About;
+export default Results;

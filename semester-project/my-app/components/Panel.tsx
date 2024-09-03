@@ -1,5 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import warning from '../assets/warning_big.png'
+import info from '../assets/info.png'
 import styles from './Panel.module.css';
 
 const CollapsiblePanel = ({ title, type, text, children }: any) => {
@@ -20,21 +23,22 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
   };
 
   let panelType = "defaultpanel";
-  let icon = '';
+  let iconSrc = '';
 
-  if (type == 'warning') {
+  if (type === 'warning') {
     panelType = "warningpanel";
-    icon = 'https://i.postimg.cc/3RwdQvfY/warning-big.png';
-  } else if (type == 'warning-special'){
+    iconSrc = warning.src;
+  } else if (type === 'warning-special'){
     panelType = "specialpanel";
-    icon = 'https://i.postimg.cc/50sbfHhS/info.png';
+    iconSrc = info.src;
   }
 
   return (
     <div className={`${panelType} ${showPanel ? 'show' : ''}`}>
       <div className={type} onClick={toggleCollapse}>
         <div className="title">
-          {icon && <img src={icon} alt={`${type} icon`} className="icon" />}{title}
+          {iconSrc && <Image src={iconSrc} alt={`${type} icon`} width={20} height={20} className="icon" />}
+          &nbsp;&nbsp;{title}
         </div>
         <div className="collapse-toggle">{isCollapsed ? '+' : '-'}</div>
       </div>
@@ -54,16 +58,13 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           transform: translateY(20px);
           transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
           overflow: hidden;
-
         }
-        .show.defaultpanel.show,
-        .show.specialpanel.show,
-        .show.warningpanel.show {
+        .show.defaultpanel,
+        .show.specialpanel,
+        .show.warningpanel {
           opacity: 1;
           transform: translateY(0);
-          transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
-
         .icon {
           margin-right: 5px;
           max-width: 20px;
@@ -88,9 +89,8 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           align-items: center;
           max-width: 900px;
         }
-
         .specialpanel {
-          border: 2px dashed #0000ff;
+          border: 2px solid #0000ff;
           margin-bottom: 10px;
           width: 100%; /* Set the width to 50% or adjust as needed */
           border-radius: 5px; /* Rounded borders */
@@ -98,7 +98,6 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           align-items: center;
           max-width: 900px;
         }
-
         .criticalpanel {
           border: 1px solid #ff0000;
           margin-bottom: 10px;
@@ -108,7 +107,6 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           align-items: center;
           max-width: 900px;
         }
-
         @media screen and (max-width: 600px) {
           .defaultpanel {
             border: 1px solid #ccc;
@@ -178,7 +176,6 @@ const CollapsiblePanel = ({ title, type, text, children }: any) => {
           cursor: pointer;
           color: #ffffff;
           background-color: #db5151; /* Color of the upper part of the panel */
-        
         }
         .title {
           padding: 5px;
