@@ -8,7 +8,7 @@ export default function NotFound() {
       <div style={styles.container}>
         <h1 style={styles.oopsText}>Oops!</h1>
         <p style={styles.descriptionText}>
-          The page you're looking for doesn't exist or has been moved.
+          The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <Link href="/" passHref>
           <button style={styles.button}>Return to Home</button>
