@@ -15,7 +15,7 @@ const About = () => {
             <main className="flex flex-grow items-center justify-center p-4">
                 <section className="p-6 border-2 border-blue-500 rounded-lg w-full max-w-lg bg-white">
                     <p className=" mb-4 text-center">
-                        Excalibur is a comprehensive tool designed to analyze and dissect executable files. It provides in-depth insights into the structure, behavior, and potential threats of executable files, helping users to understand and manage their software environments effectively. Whether you're dealing with malware analysis, debugging, or general file inspection, Excalibur offers a robust set of features to enhance your file analysis capabilities.
+                        Excalibur is a comprehensive tool designed to analyze and dissect executable files. It provides in-depth insights into the structure, behavior, and potential threats of executable files, helping users to understand and manage their software environments effectively. Whether you&apos;re dealing with malware analysis, debugging, or general file inspection, Excalibur offers a robust set of features to enhance your file analysis capabilities.
                     </p>
 
                     <div className="flex flex-col items-center space-y-4">
