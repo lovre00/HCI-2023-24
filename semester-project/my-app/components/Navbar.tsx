@@ -3,6 +3,8 @@ import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 import { FaSearch, FaHome, FaBook, FaRss, FaInfoCircle, FaEnvelope } from 'react-icons/fa'; // Import icons
+import logo from '../assets/logo.png';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -49,7 +51,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        <Link href="/" className={styles.logo}><img src="https://i.postimg.cc/Sxf7r8Hr/logo.png" alt="logo" width="32"/></Link>
+        <Link href="/" className={styles.logo}><Image src={logo.src} width={32} height={32} alt="Excalibur"/></Link>
         <div className={styles.searchContainer}>
           <FaSearch className={styles.searchIcon} />
           <input
@@ -87,8 +89,8 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/blog" className={styles.navLink}>
-              <FaRss className={styles.icon} />
+            <Link href="/documentation" className={styles.navLink}>
+              <FaBook className={styles.icon} />
               <span className={styles.text}>Blog</span>
             </Link>
           </li>

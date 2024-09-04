@@ -1,0 +1,122 @@
+{
+  "Machine": {
+    "title": "Machine",
+    "explanation": "Specifies the target machine type, indicating the architecture for which the executable is intended."
+  },
+  "TimeDateStamp": {
+    "title": "TimeDateStamp",
+    "explanation": "Represents the time and date when the file was created or last modified."
+  },
+  "NumberOfSections": {
+    "title": "NumberOfSections",
+    "explanation": "Indicates the number of sections present in the executable file."
+  },
+  "SizeOfOptionalheader": {
+    "title": "SizeOfOptionalheader",
+    "explanation": "Specifies the size of the optional header in bytes."
+  },
+  "Magic": {
+    "title": "Magic",
+    "explanation": "Denotes the format of the optional header. Different values indicate different header formats (e.g., PE32 or PE32+)."
+  },
+  "MajorLinkerVersion": {
+    "title": "MajorLinkerVersion",
+    "explanation": "Specifies the major version number of the linker used to create the executable."
+  },
+  "MinorLinkerVersion": {
+    "title": "MinorLinkerVersion",
+    "explanation": "Specifies the minor version number of the linker used."
+  },
+  "SizeOfCode": {
+    "title": "SizeOfCode",
+    "explanation": "Indicates the total size of all code sections, measured in bytes."
+  },
+  "SizeOfInitializedData": {
+    "title": "SizeOfInitializedData",
+    "explanation": "Specifies the total size of initialized data sections, measured in bytes."
+  },
+  "SizeOfUninitializedData": {
+    "title": "SizeOfUninitializedData",
+    "explanation": "Indicates the total size of uninitialized data sections, measured in bytes."
+  },
+  "EntryPoint": {
+    "title": "EntryPoint",
+    "explanation": "Specifies the address of the entry point where execution begins."
+  },
+  "BaseOfCode": {
+    "title": "BaseOfCode",
+    "explanation": "Specifies the starting address of the code section within the image."
+  },
+  "ImageBase": {
+    "title": "ImageBase",
+    "explanation": "Specifies the preferred base address of the image when loaded into memory."
+  },
+  "SectionAlignment": {
+    "title": "SectionAlignment",
+    "explanation": "Defines the alignment of sections in memory, specifying the boundary on which sections are aligned."
+  },
+  "FileAlignment": {
+    "title": "FileAlignment",
+    "explanation": "Specifies the alignment of sections in the file on disk."
+  },
+  "MajorOperatingSystemVersion": {
+    "title": "MajorOperatingSystemVersion",
+    "explanation": "Denotes the major version number of the operating system required to run the executable."
+  },
+  "MinorOperatingSystemVersion": {
+    "title": "MinorOperatingSystemVersion",
+    "explanation": "Denotes the minor version number of the operating system required."
+  },
+  "MajorImageVersion": {
+    "title": "MajorImageVersion",
+    "explanation": "Specifies the major version number of the image."
+  },
+  "MinorImageVersion": {
+    "title": "MinorImageVersion",
+    "explanation": "Specifies the minor version number of the image."
+  },
+  "Checksum": {
+    "title": "Checksum",
+    "explanation": "Contains a checksum of the image for error checking. A value of 0 often indicates it's not used."
+  },
+  "MajorSubsystemVersion": {
+    "title": "MajorSubsystemVersion",
+    "explanation": "Denotes the major version number of the subsystem required to run the executable."
+  },
+  "MinorSubsystemVersion": {
+    "title": "MinorSubsystemVersion",
+    "explanation": "Denotes the minor version number of the subsystem required."
+  },
+  "SizeOfImage": {
+    "title": "SizeOfImage",
+    "explanation": "Specifies the total size of the image, including all sections, when loaded into memory."
+  },
+  "SizeOfHeader": {
+    "title": "SizeOfHeader",
+    "explanation": "Indicates the size of the header section."
+  },
+  "Subsystem": {
+    "title": "Subsystem",
+    "explanation": "Specifies the type of subsystem required to run the executable, such as a console or graphical user interface."
+  },
+  "SizeOfStackReserve": {
+    "title": "SizeOfStackReserve",
+    "explanation": "Denotes the size of the stack reserved for the application."
+  },
+  "SizeOfStackCommit": {
+    "title": "SizeOfStackCommit",
+    "explanation": "Specifies the amount of memory initially committed for the stack."
+  },
+  "SizeOfHeapReserve": {
+    "title": "SizeOfHeapReserve",
+    "explanation": "Indicates the size of the heap reserved for the application."
+  },
+  "SizeOfHeapCommit": {
+    "title": "SizeOfHeapCommit",
+    "explanation": "Specifies the amount of memory initially committed for the heap."
+  },
+  "NumberOfRvaAndSizes": {
+    "title": "NumberOfRvaAndSizes",
+    "explanation": "Indicates the number of data directories in the optional header."
+  }
+}

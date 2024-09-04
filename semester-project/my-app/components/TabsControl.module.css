@@ -1,0 +1,165 @@
+/* TabsControl.module.css */
+
+.tabsControl {
+    display: flex;
+    width: 900px;
+    margin: auto;
+}
+
+.tabMenu {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    width: 200px;
+    align-items: end;
+}
+
+.tabMenu button {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent; /* Transparent background for subtle tabs */
+    transition: background-color 0.3s, font-weight 0.3s;
+    text-align: left;
+    color: #555; /* Subtle color for inactive tabs */
+    font-size: 14px;
+    font-weight: normal; /* Normal font weight for inactive tabs */
+    position: relative;
+    width: 180px;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabMenu button:hover {
+    background-color: #f0f0f0; /* Light background on hover */
+}
+
+.tabMenu button.activeTab {
+    background-color: transparent;
+    color: #007bff;
+    font-weight: bold; /* Bold font for active tab */
+    padding-left: 25px; /* Adjust padding to accommodate the '>' symbol */
+}
+
+.tabMenu button.activeTab::before {
+    content: ">";
+    position: absolute;
+    left: 10px; /* Position the '>' symbol slightly to the left */
+    color: #007bff; /* Same color as active tab text */
+    font-weight: bold; /* Ensure the '>' is bold */
+}
+
+.tabContent {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.tabContent h1 {
+    font-size: 2em;
+    margin: 5px;
+    color: #007bff;
+}
+
+.tabContent h2 {
+    font-size: 25px;
+    margin: 5px;
+    color: #007bff;
+    padding-top: 20px;
+}
+
+.tabContent p {
+    text-align: justify;
+    margin: 20px 20px 0px 10px;
+}
+
+.tabContent blockquote {
+    margin-left: 20px;
+    border-left: 5px solid #ccc;
+    color: gray;
+}
+
+.tabContent span[style*="monospace"] {
+    background-color: #862c2c;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.codeBlock {
+    margin: 20px;
+    background-color: gray;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+}
+
+.scrollableContent {
+    max-height: 900px;
+    overflow-y: auto;
+}
+
+/* Existing styles... */
+
+/* Mobile Styles */
+/* Hide dropdown on desktop */
+.dropdownMenu {
+    display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .tabsControl {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tabMenu {
+        display: none; /* Hide the tab menu in mobile view */
+    }
+
+    .dropdownMenu {
+        display: block; /* Show dropdown on mobile */
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .dropdownMenu select {
+        width: 100%;
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .tabContent {
+        padding: 15px;
+        border: none;
+    }
+
+    .scrollableContent {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+     /* Other mobile styles... */
+    
+     .codeBlock {
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent line breaks */
+        border-radius: 10px;
+        padding: 10px;
+        background-color: gray;
+        color: white;
+    }
+
+    .codeBlock pre {
+        margin: 0;
+    }
+}

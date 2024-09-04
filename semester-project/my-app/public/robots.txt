@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://hci-2023-24-azure.vercel.app/
+
+# Sitemaps
+Sitemap: https://hci-2023-24-azure.vercel.app/sitemap.xml

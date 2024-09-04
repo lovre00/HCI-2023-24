@@ -51,14 +51,14 @@
   flex: 1; /* Allow search container to grow */
   text-align: center; /* Center text inside search box */
   position: relative; /* Ensure positioning context for the suggestions list */
-  background-color: #ffffff;
+  background-color: #154fcc;
   border-radius: 20px;
   height: 30px;
 }
 
 .searchIcon {
-  color: #2563EB;
-  background-color: #ffffff;
+  color: #fcfcfc;
+  background-color: #154fcc;
   margin-right: 8px;
 }
 
@@ -69,7 +69,8 @@
   border-radius: 4px;
   outline: none;
   border-radius: 20px;
-  color: #333333;
+  color: #ffffff;
+  background-color: #154fcc;
   height: 30px;
   font-size: 13px;
 }

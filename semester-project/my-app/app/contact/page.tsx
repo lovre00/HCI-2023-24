@@ -1,10 +1,15 @@
+// pages/contact.tsx
+import React from 'react';
 import Navbar from '../../components/Navbar';
+import ContactForm from '../../components/ContactForm';
+import ExcaliburComponent from '@/components/Logo';
 
-const Contact = () => {
+const Contact: React.FC = () => {
     return (
-        <div>
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
-            <h1>Contact Page</h1>
+            <ExcaliburComponent/>
+            <ContactForm/>
         </div>
     );
 };
