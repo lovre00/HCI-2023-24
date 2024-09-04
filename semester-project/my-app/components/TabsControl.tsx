@@ -9,7 +9,7 @@ import { MARKS } from '@contentful/rich-text-types';
 const TabsControl = () => {
     const [tabsData, setTabsData] = useState<TabData[]>([]);
     const [activeTab, setActiveTab] = useState<string | null>(null);
-    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 600); // Initialize with window width check
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     // Fetch data from Contentful
     useEffect(() => {
@@ -34,7 +34,8 @@ const TabsControl = () => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 600);
         };
-        
+
+        handleResize(); // Set the initial value
         window.addEventListener('resize', handleResize); // Add resize event listener
         return () => window.removeEventListener('resize', handleResize); // Cleanup
     }, []);
@@ -45,12 +46,11 @@ const TabsControl = () => {
         content: any; // Replace 'any' with the actual type of your content
     }
 
-    // Render
     return (
         <div className={styles.tabsControl}>
             {!isMobile && (
                 <div className={styles.tabMenu}>
-                    {tabsData.map((tab: any) => (
+                    {tabsData.map((tab: TabData) => (
                         <React.Fragment key={tab.id}>
                             <button
                                 className={tab.id === activeTab ? styles.activeTab : ''}
@@ -69,7 +69,7 @@ const TabsControl = () => {
                         value={activeTab || ''}
                         onChange={(e) => setActiveTab(e.target.value)}
                     >
-                        {tabsData.map((tab: any) => (
+                        {tabsData.map((tab: TabData) => (
                             <option key={tab.id} value={tab.id}>
                                 {tab.title}
                             </option>
@@ -80,7 +80,7 @@ const TabsControl = () => {
             <div className={styles.scrollableContent}>
                 {activeTab && (
                     <TabContent
-                        content={tabsData.find((tab: any) => tab.id === activeTab)?.content}
+                        content={tabsData.find((tab) => tab.id === activeTab)?.content}
                     />
                 )}
             </div>
@@ -89,16 +89,16 @@ const TabsControl = () => {
 };
 
 // Component to render the Rich Text content
-const TabContent = ({ content }: any) => {
+const TabContent = ({ content }: { content: any }) => {
     const options = {
         renderNode: {
-            [BLOCKS.HEADING_2]: (node:any, children:any) => (
+            [BLOCKS.HEADING_2]: (node: any, children: any) => (
                 <h2 id={node.content[0].value.replace(/\s+/g, '-').toLowerCase()}>{children}</h2>
             ),
-            [BLOCKS.QUOTE]: (node:any, children:any) => (
+            [BLOCKS.QUOTE]: (node: any, children: any) => (
                 <blockquote>{children}</blockquote>
             ),
-            [BLOCKS.EMBEDDED_ENTRY]: (node:any) => {
+            [BLOCKS.EMBEDDED_ENTRY]: (node: any) => {
                 if (node.data.target.sys.contentType.sys.id === 'code') {
                     const codeSnippet = node.data.target.fields.snippet;
                     return (
@@ -111,11 +111,7 @@ const TabContent = ({ content }: any) => {
         },
     };
 
-    return (
-        <div className={styles.tabContent}>
-            {documentToReactComponents(content, options)}
-        </div>
-    );
+    return <div className={styles.tabContent}>{documentToReactComponents(content, options)}</div>;
 };
 
 export default TabsControl;
