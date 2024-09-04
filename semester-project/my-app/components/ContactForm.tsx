@@ -19,9 +19,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
         // Basic validation
         const newErrors: typeof errors = {};
-        if (!name) newErrors.name = 'Name is required';
-        if (!email) newErrors.email = 'Email is required';
-        if (!message) newErrors.message = 'Message is required';
+        if (!name) newErrors.name = 'Name is required!';
+        if (!email) newErrors.email = 'Email is required!';
+        if (!message) newErrors.message = 'Message is required!';
         setSubmitted(false);
 
         setErrors(newErrors);
@@ -87,7 +87,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
             >
                 Send Message
             </button>
-            {submitted && <p style={{ color: 'green', marginTop: '12px', fontSize: '12px'}}>Thanks, we'll get back to you as soon as possible!</p>} {/* Thank you message */}
+            {submitted && <p style={{ color: 'green', marginTop: '12px', fontSize: '12px'}}>Thanks, we&apos;ll get back to you as soon as possible!</p>} {/* Thank you message */}
         </form>
     );
 };
