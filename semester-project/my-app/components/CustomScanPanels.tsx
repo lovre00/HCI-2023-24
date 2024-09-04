@@ -5,6 +5,16 @@ import jsonData from '../assets/pe.json'; // Importing the JSON file
 import infoIcon from '../assets/info.png'; // Importing the info icon
 import styles from './CustomScanPanels.module.css'; // Importing the CSS module
 
+// Define the types for the JSON data
+interface JsonDataItem {
+    title: string;
+    explanation: string;
+}
+
+interface JsonData {
+    [key: string]: JsonDataItem;
+}
+
 interface CustomScanPanelsProps {
     data: Record<string, any>;
 }
@@ -22,7 +32,8 @@ const CustomScanPanels: React.FC<CustomScanPanelsProps> = ({ data }) => {
     return (
         <div style={gridContainerStyle as React.CSSProperties}>
             {Object.entries(data).map(([key, value], index) => {
-                const info = jsonData[key];
+                const info = (jsonData as JsonData)[key]; // Type-cast jsonData to JsonData
+
                 return (
                     <div key={index} className={styles.panel}>
                         <div className={styles.title}>
