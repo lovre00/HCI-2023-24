@@ -59,7 +59,7 @@ const ImportsTable = ({ importsData, malapiImportCheckData }: any) => {
     return (
       <div style={panelStyle} onClick={togglePanel}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ marginLeft: '5px' }}>{func}</span>
+          <span style={{ marginLeft: '5px'}}>{func}</span>
           <span>{isExpanded ? '-' : '+'}</span>
         </div>
         <span style={nonMalapiDll}>{dll}</span>

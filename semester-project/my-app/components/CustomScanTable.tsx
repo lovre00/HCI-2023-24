@@ -111,7 +111,7 @@ const ImportsTable = ({ importsData, malapiImportCheckData }: any) => {
   const nonMalapiDll: React.CSSProperties = {
     textAlign: 'right',
     color: '#777',
-    fontSize: '11px',
+    fontSize: '10px',
     padding: '5px',
   };
 
