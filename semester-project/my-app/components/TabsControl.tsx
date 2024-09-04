@@ -9,7 +9,7 @@ import styles from './TabsControl.module.css';
 const TabsControl = () => {
     const [tabsData, setTabsData] = useState<TabData[]>([]);
     const [activeTab, setActiveTab] = useState<string | null>(null);
-    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 600); // Initialize with window width check
+    const [isMobile, setIsMobile] = useState<boolean>(false); // Default to false
 
     // Fetch data from Contentful
     useEffect(() => {
@@ -35,8 +35,14 @@ const TabsControl = () => {
             setIsMobile(window.innerWidth <= 600);
         };
         
-        window.addEventListener('resize', handleResize); // Add resize event listener
-        return () => window.removeEventListener('resize', handleResize); // Cleanup
+        // Initialize the state on mount
+        handleResize();
+
+        // Add resize event listener
+        window.addEventListener('resize', handleResize);
+        
+        // Clean up the event listener on component unmount
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     interface TabData {
