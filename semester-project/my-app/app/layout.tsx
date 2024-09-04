@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: 'Excalibur',
   description: 'Windows executable file analysis suite',
   keywords: "executable analysis reverse-engineering windows exe malware",
-  viewport: "width=device-width, initial-scale=1.0"
 }
 
 export default function RootLayout({
