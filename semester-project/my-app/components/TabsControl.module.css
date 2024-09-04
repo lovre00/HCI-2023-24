@@ -39,7 +39,7 @@
 
 .tabMenu button.activeTab {
     background-color: transparent;
-    color: #007bff;
+    color: #154fcc;
     font-weight: bold; /* Bold font for active tab */
     padding-left: 25px; /* Adjust padding to accommodate the '>' symbol */
 }
@@ -62,13 +62,13 @@
 .tabContent h1 {
     font-size: 2em;
     margin: 5px;
-    color: #007bff;
+    color: #154fcc;
 }
 
 .tabContent h2 {
     font-size: 25px;
     margin: 5px;
-    color: #007bff;
+    color: #154fcc;
     padding-top: 20px;
 }
 
@@ -92,9 +92,10 @@
 .codeBlock {
     margin: 20px;
     background-color: gray;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 20px;
     color: white;
+    overflow-x: auto; 
 }
 
 .scrollableContent {
@@ -110,6 +111,13 @@
     display: none;
 }
 
+.embeddedImage {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure image behaves like a block-level element */
+    margin: 10px 0; /* Add some spacing around images */
+}
+
 /* Mobile Styles */
 @media (max-width: 600px) {
     .tabsControl {
@@ -121,22 +129,77 @@
         display: none; /* Hide the tab menu in mobile view */
     }
 
-    .dropdownMenu {
-        display: block; /* Show dropdown on mobile */
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+   /* Existing styles... */
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    /* Other mobile styles... */
     
+    .dropdownMenu {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        width: 90%;
+        margin-top: 20px;
+        padding: 0; /* Remove default padding */
+        border: 1px solid #154fcc; /* Blue border for dropdown */
+        border-radius: 5px;
+        background-color: white; /* White background for dropdown */
+        position: relative; /* For positioning the custom icon */
+        box-shadow: none; /* Remove shadow */
+        height: 40px;
+    }
+
     .dropdownMenu select {
         width: 100%;
-        padding: 5px;
-        font-size: 16px;
-        border: 1px solid #ccc;
+        padding: 6px 30px 6px 15px; /* Adjust padding for icon space */
+        font-size: 12px; /* Reduce font size */
+        height: 36px; /* Reduce height */
+        border: none; /* Remove default border */
         border-radius: 5px;
+        background-color: white; /* White background */
+        color: #154fcc; /* Blue text */
+        appearance: none; /* Remove default dropdown arrow */
+        background-image: none; /* Remove default arrow */
+        font-family: 'Arial', sans-serif; /* Match your website font */
+        text-align: left; /* Align text to the left */
     }
+
+    .dropdownMenu select option {
+        background-color: white; /* White background for options */
+        color: #154fcc; /* Blue text for options */
+        width: 100%;
+    }
+
+    .dropdownIcon {
+        margin-left: 10px;
+        color: #154fcc;
+    }
+
+    .dropdownMenu select option:hover {
+        background-color: #f0f0f0; /* Light grey background on hover */
+    }
+
+    .dropdownMenu::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 10px; /* Space from the left edge */
+        transform: translateY(-50%); /* Center icon vertically */
+        width: 20px; /* Adjust size as needed */
+        height: 20px; /* Adjust size as needed */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #007bff; /* Blue color for the icon */
+    }
+
+    .dropdownMenu select:focus {
+        outline: none;
+        border-color: #007bff; /* Blue border color on focus */
+        box-shadow: none; /* Ensure no shadow on focus */
+    }
+}
 
     .tabContent {
         padding: 15px;
