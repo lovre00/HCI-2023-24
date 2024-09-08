@@ -20,7 +20,7 @@ const ImportsTable = ({ importsData, malapiImportCheckData }: any) => {
           rows.push(
             <tr key={`${func}-${dll}`}>
               <td style={nonMalapiDataCellStyle}>
-              &nbsp;{func} <br />
+              <span style={{ marginLeft: '5px', fontWeight: 'bold', fontSize: '12px'}}>{func}</span> <br />
                 <span style={nonMalapiDll}>{dll}</span>
               </td>
             </tr>
@@ -59,7 +59,7 @@ const ImportsTable = ({ importsData, malapiImportCheckData }: any) => {
     return (
       <div style={panelStyle} onClick={togglePanel}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ marginLeft: '5px'}}>{func}</span>
+          <span style={{ marginLeft: '5px', fontWeight: 'bold', fontSize: '12px'}}>{func}</span>
           <span>{isExpanded ? '-' : '+'}</span>
         </div>
         <span style={nonMalapiDll}>{dll}</span>
@@ -102,7 +102,7 @@ const ImportsTable = ({ importsData, malapiImportCheckData }: any) => {
     textAlign: 'right',
     color: '#777',
     fontSize: '11px',
-    padding: '6px',
+    padding: '6px'
   };
 
   return (

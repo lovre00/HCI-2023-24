@@ -77,11 +77,10 @@
 
 .suggestionsList {
   position: absolute;
-  top: calc(100% + 2px); /* Position directly below the searchInput */
+  top: calc(100%); /* Position directly below the searchInput */
   right: 0; /* Align to the left of the searchInput */
-  width: calc(100% - 24px); /* Match the width of the input, with padding adjustments */
-  background: #ffffff;
-  border-radius: 4px;
+  width: calc(100% - 44px); /* Match the width of the input, with padding adjustments */
+  background: #0e40ac;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   max-height: 200px;
   overflow-y: auto;
@@ -89,19 +88,20 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  border-radius: 30px;
 }
 
 .suggestionItem {
   font-size: 13px;
   padding: 8px 12px;
   cursor: pointer;
-  color: #000000; /* Ensure text color is black */
+  color: white; /* Ensure text color is black */
   text-align: left; /* Align text to the left */
   box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .suggestionItem:hover {
-  background: #f0f0f0;
+  background: #3c71e2;
 }
 
 /* Existing Navbar and Menu Styles */
@@ -133,9 +133,16 @@
 }
 
 .navLink:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Updated hover effect */
+  background-color: rgba(255, 255, 255, 0.1); /* Updated hover effect */
   color: #ffffff;
   transform: scale(1.05); /* Slight scaling effect */
+  border-radius: 5px;
+}
+/* Add this to your Navbar.module.css */
+.navLink.active {
+  background-color: rgba(255, 255, 255, 0.3); /* Highlight color */
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 .navButton {
